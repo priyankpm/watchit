@@ -74,7 +74,8 @@ class _WatchListScreenState extends State<WatchListScreen> {
                               controller.watchList.length,
                               (index) => GestureDetector(
                                 onTap: () {
-                                  Get.to(() => MovieDetailsScreen(movie: controller.watchList[index]));
+                                  Get.to(() => MovieDetailsScreen(movie: controller.watchList[index]),
+                                      transition: Transition.fadeIn);
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(bottom: height * 0.02),

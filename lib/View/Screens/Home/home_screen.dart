@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:watchit/Controller/bottom_bar_controller.dart';
@@ -106,15 +109,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
                                     children: [
-                                      Stack(
-                                        children: [
-                                          SizedBox(
-                                            height: height * 0.28,
-                                            child: ListView.builder(
-                                              itemCount: 5,
-                                              shrinkWrap: true,
-                                              scrollDirection: Axis.horizontal,
-                                              itemBuilder: (context, index) => Container(
+                                      ListView.builder(
+                                        itemCount: 5,
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemBuilder: (context, index) => GestureDetector(
+                                          onTap: () {
+                                            Get.to(() => MovieDetailsScreen(movie: controller.movieList[index]),
+                                                transition: Transition.fadeIn);
+                                          },
+                                          child: Stack(
+                                            clipBehavior: Clip.none,
+                                            children: [
+                                              Container(
                                                 height: height * 0.28,
                                                 width: width * 0.38,
                                                 margin: EdgeInsets.only(right: width * 0.03),
@@ -126,22 +133,55 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                 ),
                                               ),
-                                            ),
+
+                                              Padding(
+                                                padding: EdgeInsets.only(top: height * 0.23, right: width * 0.25),
+                                                child: Image.asset(
+                                                  controller.countImage[index],
+                                                  width: width * 0.16,
+                                                ),
+                                              )
+
+                                              // Stack(
+                                              //   children: [
+                                              //     SizedBox(
+                                              //       height: height * 0.28,
+                                              //       child: ListView.builder(
+                                              //         itemCount: 5,
+                                              //         shrinkWrap: true,
+                                              //         scrollDirection: Axis.horizontal,
+                                              //         itemBuilder: (context, index) => GestureDetector(
+                                              //           onTap: () {},
+                                              //           child: Container(
+                                              //             height: height * 0.28,
+                                              //             width: width * 0.38,
+                                              //             margin: EdgeInsets.only(right: width * 0.03),
+                                              //             decoration: BoxDecoration(
+                                              //               borderRadius: BorderRadius.circular(20),
+                                              //               image: DecorationImage(
+                                              //                 image: NetworkImage(
+                                              //                     controller.movieList[index].posterPath ?? ''),
+                                              //                 fit: BoxFit.fill,
+                                              //               ),
+                                              //             ),
+                                              //           ),
+                                              //         ),
+                                              //       ),
+                                              //     ),
+                                              //     Padding(
+                                              //       padding: EdgeInsets.only(
+                                              //           top: index == 0 ? height * 0.23 : height * 0.21,
+                                              //           right: width * 0.25),
+                                              //       child: Image.asset(
+                                              //         controller.countImage[index],
+                                              //         width: width * 0.16,
+                                              //       ),
+                                              //     )
+                                              //   ],
+                                              // ),
+                                            ],
                                           ),
-                                          ListView.builder(
-                                            itemCount: 5,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.horizontal,
-                                            itemBuilder: (context, index) => Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: index == 0 ? height * 0.23 : height * 0.21, right: width * 0.25),
-                                              child: Image.asset(
-                                                controller.countImage[index],
-                                                width: width * 0.16,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       )
                                     ],
                                   ),
@@ -180,7 +220,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisExtent: height * 0.2),
                                 itemBuilder: (context, index) => GestureDetector(
                                   onTap: () {
-                                    Get.to(() => MovieDetailsScreen(movie: controller.movieList[index]));
+                                    Get.to(() => MovieDetailsScreen(movie: controller.movieList[index]),
+                                        transition: Transition.fadeIn);
                                   },
                                   child: Container(
                                     height: height * 0.15,

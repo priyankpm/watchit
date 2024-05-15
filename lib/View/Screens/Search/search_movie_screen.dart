@@ -122,7 +122,8 @@ class _SearchMovieScreenState extends State<SearchMovieScreen> {
                                 controller.searchMovieList.length,
                                 (index) => GestureDetector(
                                   onTap: () {
-                                    Get.to(() => MovieDetailsScreen(movie: controller.searchMovieList[index]));
+                                    Get.to(() => MovieDetailsScreen(movie: controller.searchMovieList[index]),
+                                        transition: Transition.fadeIn);
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(bottom: height * 0.02),
